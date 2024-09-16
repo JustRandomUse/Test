@@ -1,0 +1,84 @@
+ <!-- <div class="container">
+  <input type="text" placeholder="Поиск..." (keyup.enter)="onSearch($event)">
+  <button (click)="addEmployee(employees)">Добавить Сотрудника</button>  -->
+
+  <!-- модального окна -->
+<!-- <div class="modal" ngIf="showModal">
+  <div class="modal-content">
+    <h2>Добавить сотрудника</h2> -->
+    <!-- Форма для добавления сотрудника -->
+    <!-- <form (submit)="submitEmployee()">
+      <label>ФИО:</label>
+      <input [(ngModel)]="newEmployee.name">
+      <label>Кабинет:</label>
+      <input [(ngModel)]="newEmployee.office">
+      <button type="submit">Сохранить</button>
+      <button (click)="closeModal()">Отмена</button>
+    </form>
+  </div>
+</div> -->
+
+  <!-- <table>
+    <thead>
+      <tr>
+        <th>Таб №</th>
+        <th>ФИО</th>
+        <th>Кабинет</th>
+        <th>🗑️</th>
+        <th>✏️</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.office }}</td>
+        <td><button (click)="deleteEmployee(employees)">🗑️</button></td>
+        <td><button (click)="editEmployee(employees)">✏️</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+ 
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Страница {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= totalItems">Next</button>
+  </div>
+</div>   -->
+
+
+<div class="container"></div>
+  <!-- <input type="text" placeholder="Поиск..." (keyup.enter)="onSearch($event)"> -->
+  
+  <!-- Форма для добавления нового сотрудника -->
+  <div class="add-employee-form">
+    <input #nameInput type="text" placeholder="ФИО">
+    <input #officeInput type="number" placeholder="Кабинет">
+    <button (click)="add(nameInput.value, +officeInput.value)">Добавить Сотрудника</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Таб №</th>
+        <th>ФИО</th>
+        <th>Кабинет</th>
+        <th>🗑️</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.Name }}</td>
+        <td>{{ employee.Office }}</td>
+        <td><button (click)="delete(employee)">🗑️</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Страница {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= totalItems">Next</button>
+  </div> -->

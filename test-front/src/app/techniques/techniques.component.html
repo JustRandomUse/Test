@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="button-container">
+      <button (click)="openAddEmployeeModal()">Добавить Сорудника</button>
+    </div>
+  
+    <div class="search-container">
+      <input type="text" placeholder="Поиск..." (keyup.enter)="onSearch($event)">
+    </div>
+  </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Инв №</th>
+          <th>Наименование</th>
+          <th>Тип</th>
+          <th>🗑️</th>
+          <th>✏️</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let techniques of techniques">
+          <td>{{ techniques.id}}</td>
+          <td>{{ techniques.name}}</td>
+          <td>{{ techniques.type}}</td>
+          <td><button (click)="deleteEmployee(techniques)">🗑️</button></td>
+          <td><button (click)="editEmployee(techniques)">✏️</button></td>
+        </tr>
+      </tbody>
+    </table>

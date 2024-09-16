@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="button-container">
+    <button (click)="openAddEmployeeEquipmentModal()">Добавить Сотрудника</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" placeholder="Поиск..." (keyup.enter)="onSearch($event)">
+  </div>
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>ФИО</th>
+        <th>Кабинет</th>
+        <th>Техника</th>
+        <th>🗑️</th>
+        <th>✏️</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee_equipment of employee_equipment">
+        <td>{{ employee_equipment.id}}</td>
+        <td>{{ employee_equipment.name }}</td>
+        <td>{{ employee_equipment.office }}</td>
+        <td>{{ employee_equipment.Techniques }}</td>
+        <td><button (click)="deleteEmployeeEquipment(employee_equipment)">🗑️</button></td>
+        <td><button (click)="editEmployeeEquipment(employee_equipment)">✏️</button></td>
+      </tr>
+    </tbody>
+  </table>
