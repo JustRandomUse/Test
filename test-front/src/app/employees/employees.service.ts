@@ -7,6 +7,9 @@ import { MessageService } from '../message.service';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeesService {
+  getEmployees(currentPage: number, itemsPerPage: number) {
+    throw new Error('Method not implemented.');
+  }
 
   private employeesUrl = 'http://localhost:8080/employees';  // URL для API
 
@@ -18,6 +21,7 @@ export class EmployeesService {
     private http: HttpClient,
     private messageService: MessageService
   ) {}
+  
 
   /** GET: получить всех сотрудников с сервера */
   getEmployee(): Observable<EmployeeResponse> {
@@ -75,18 +79,18 @@ export class EmployeesService {
   }
 
   /* GET: поиск сотрудников по имени */
-  searchEmployees(term: string): Observable<Employee[]> {
-    if (!term.trim()) {
-      // если поисковый запрос пуст, возвращаем пустой массив
-      return of([]);
-    }
-    return this.http.get<Employee[]>(`${this.employeesUrl}/?name=${term}`).pipe(
-      tap(x => x.length ?
-        this.log(`found employees matching "${term}"`) :
-        this.log(`no employees matching "${term}"`)),
-      catchError(this.handleError<Employee[]>('searchEmployees', []))
-    );
-  }
+  // searchEmployees(term: string): Observable<Employee[]> {
+  //   if (!term.trim()) {
+  //     // если поисковый запрос пуст, возвращаем пустой массив
+  //     return of([]);
+  //   }
+  //   return this.http.get<Employee[]>(`${this.employeesUrl}/?name=${term}`).pipe(
+  //     tap(x => x.length ?
+  //       this.log(`found employees matching "${term}"`) :
+  //       this.log(`no employees matching "${term}"`)),
+  //     catchError(this.handleError<Employee[]>('searchEmployees', []))
+  //   );
+  // }
 
   //////// Методы сохранения данных //////////
 
@@ -175,3 +179,5 @@ export class EmployeesService {
     this.messageService.add('EmployeesService: ${message}');
   }
 }
+
+export { EmployeeResponse };

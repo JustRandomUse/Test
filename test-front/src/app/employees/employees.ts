@@ -1,7 +1,7 @@
 export interface Employee {
     id: number;
-    Name: string ;
-    Office: number ;
+    name: string ;
+    office: number ;
 }
 
 export interface EmployeeResponse {
