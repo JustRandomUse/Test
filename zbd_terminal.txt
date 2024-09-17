@@ -2,12 +2,10 @@
 CREATE TABLE employees (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    office INT, 
-    archived BOOLEAN DEFAULT FALSE,
-    deleted BOOLEAN DEFAULT FALSE
+    office INT
 );
 
-CREATE TABLE technique_type (
+CREATE TABLE technique_types (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
@@ -15,9 +13,7 @@ CREATE TABLE technique_type (
 CREATE TABLE techniques (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    technique_type_id INT REFERENCES technique_type(id) ON DELETE CASCADE, 
-    archived BOOLEAN DEFAULT FALSE,
-    deleted BOOLEAN DEFAULT FALSE
+    type_id INT REFERENCES technique_types(id) ON DELETE CASCADE
 );
 
 CREATE TABLE employee_equipments (
@@ -36,27 +32,56 @@ SELECT
 FROM employee_equipments ee
 JOIN employees e ON ee.employees_id = e.id  
 JOIN techniques t ON ee.technique_id = t.id  
-JOIN technique_type tt ON t.technique_type_id = tt.id;
+JOIN technique_types tt ON t.type_id = tt.id;
 
 //dml
-INSERT INTO public.employees(name, office, archived, deleted)
-	VALUES ('Иван Иванович Иванов', '101', FALSE, FALSE);
-	
-INSERT INTO public.technique_type(name)
-	VALUES ('принтер');
 
-INSERT INTO public.technique(name, technique_type_id, archived, deleted)
-	VALUES ('samsung', 1, FALSE, FALSE);
-	
-INSERT INTO public.employee_equipment(id_employees, technique_id)
-	VALUES (1, 1);
-	
+INSERT INTO technique_types (name) VALUES ('Системный блок');
+INSERT INTO techniques (name, type_id) VALUES ('Intel', 1);
+INSERT INTO employees (name, office) VALUES ('Иван Иванович Иванов', 101);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (1, 1);
 
+INSERT INTO technique_types (name) VALUES ('монитор');
+INSERT INTO techniques (name, type_id) VALUES ('Apple', 2);
+INSERT INTO employees (name, office) VALUES ('Иван Иванович Иванов', 102);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (1, 2);
 
+INSERT INTO technique_types (name) VALUES ('клавиатура');
+INSERT INTO techniques (name, type_id) VALUES ('Microsoft', 3);
+INSERT INTO employees (name, office) VALUES ('Сидр Сидорович Сидоров', 102);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (2, 3);
 
-INSERT INTO technique_types (name) VALUES ('Type1');
-INSERT INTO techniques (name, type_id) VALUES ('Technique', 3);
-INSERT INTO employees (name) VALUES ('Employees1');
-INSERT INTO employee_equipments (employees_id, technique_id) VALUES (6, 4);
+INSERT INTO technique_types (name) VALUES ('мышь');
+INSERT INTO techniques (name, type_id) VALUES ('Mouse', 4);
+INSERT INTO employees (name, office) VALUES ('Сидр Сидорович Сидоров', 103);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (2, 4);
 
+INSERT INTO technique_types (name) VALUES ('принтер');
+INSERT INTO techniques (name, type_id) VALUES ('Hp', 5);
+INSERT INTO employees (name, office) VALUES ('Петр Петрович Петров', 103);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (3, 5);
 
+INSERT INTO technique_types (name) VALUES ('Системный блок');
+INSERT INTO techniques (name, type_id) VALUES ('Intel', 1);
+INSERT INTO employees (name, office) VALUES ('Петр Петрович Петров', 104);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (3, 1);
+
+INSERT INTO technique_types (name) VALUES ('монитор');
+INSERT INTO techniques (name, type_id) VALUES ('Apple', 2);
+INSERT INTO employees (name, office) VALUES ('Иуда Иудович Иудов', 104);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (4, 2);
+
+INSERT INTO technique_types (name) VALUES ('клавиатура');
+INSERT INTO techniques (name, type_id) VALUES ('Microsoft', 3);
+INSERT INTO employees (name, office) VALUES ('Иуда Иудович Иудов', 105);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (4, 3);
+
+INSERT INTO technique_types (name) VALUES ('мышь');
+INSERT INTO techniques (name, type_id) VALUES ('Mouse', 4);
+INSERT INTO employees (name, office) VALUES ('Семен Семенович Семенов', 105);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (5, 4);
+
+INSERT INTO technique_types (name) VALUES ('принтер');
+INSERT INTO techniques (name, type_id) VALUES ('Hp', 5);
+INSERT INTO employees (name, office) VALUES ('Семен Семенович Семенов', 105);
+INSERT INTO employee_equipments (employees_id, technique_id) VALUES (5, 5);
