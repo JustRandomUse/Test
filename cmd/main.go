@@ -5,6 +5,7 @@ import (
 	"test-back/config"
 	"test-back/controllers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/joho/godotenv"
 
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,12 @@ func main() {
 	// config.DB.AutoMigrate(&models.Employees{})
 	// config.DB.AutoMigrate(&models.Technique{})
 
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:4200"}, // разрешаем запросы с порта 4200 (Angular клиент)
+		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Authorization"},
+		// AllowCredentials: true, // если требуется авторизация через cookies или токены
+	}))
 	r.GET("/inventory/:office", controllers.GetInventoryByOffice)
 	// r.GET("/inventory/:office", controllers.GetInventory)
 
