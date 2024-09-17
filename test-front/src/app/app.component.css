@@ -1,7 +1,7 @@
 nav {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  margin: 20px 0; /* Adjust top and bottom margins as needed */
+  justify-content: center; 
+  margin: 20px 0; 
 }
 
 nav a {

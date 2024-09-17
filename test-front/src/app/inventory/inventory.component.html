@@ -1,1 +1,5 @@
-<p>inventory works!</p>
+<div class="report-container">
+    <input type="number" [(ngModel)]="officeNumber" placeholder="Введите номер офиса">
+    <button (click)="generateReport()">Получить отчет</button>
+  </div>
+  <div *ngIf="reportHtml" [innerHTML]="reportHtml "></div>

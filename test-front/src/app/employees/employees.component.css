@@ -1,23 +1,22 @@
-/* Стили для контейнера навигации */
 .nav-container {
-  text-align: center; /* Центрирование навигации по горизонтали */
-  margin-bottom: 4px; /* Отступ снизу для разделения с остальным контентом */
+  text-align: center; 
+  margin-bottom: 4px; 
 }
 
-/* Стили для навигационного меню */
+
 nav {
-  display: inline-block; /* Центрирование навигации по горизонтали */
+  display: inline-block; 
 }
 
-/* Стили для ссылок навигации */
+
 nav a {
   padding: 1rem;
   text-decoration: none;
-  margin: 0 4px; /* Отступы между вкладками */
+  margin: 0 4px; 
   background-color: #e8e8e8;
   color: #3d3d3d;
   border-radius: 4px;
-  display: inline-block; /* Вкладки отображаются как блочные элементы в одной строке */
+  display: inline-block; 
 }
 
 nav a:hover {
@@ -28,15 +27,14 @@ nav a.active {
   background-color: rgb(213, 215, 224);
 }
 
-/* Стили для контейнера */
 .container {
-  text-align: center; /* Центрирование содержимого */
-  margin-top: 4px; /* Отступ сверху для разделения с навигацией */
+  text-align: center;
+  margin-top: 4px; 
 }
 
-/* Стили для кнопок */
+
 .button-container {
-  margin-bottom: 4px; /* Отступ снизу для разделения с другими элементами */
+  margin-bottom: 4px; 
 }
 
 .button-container button {
@@ -54,35 +52,35 @@ nav a.active {
   background-color: #0056b3;
 }
 
-/* Стили для поисковой строки */
+
 .search-container {
-  margin-bottom: 4px; /* Отступ снизу для разделения с кнопкой добавления */
+  margin-bottom: 4px;
 }
 
 .search-container input {
-  width: 66.67%; /* Длина поисковой строки равна длине таблицы */
+  width: 66.67%; 
   display: block;
   padding: 8px;
-  margin: 0 auto; /* Центрирование поисковой строки */
+  margin: 0 auto; 
   box-sizing: border-box;
 }
 
-/* Стили для таблицы */
+
 table {
-  width: 66.67%; /* Ширина таблицы равна ширине поисковой строки */
-  margin: 0 auto; /* Центрирование таблицы */
+  width: 66.67%;
+  margin: 0 auto; 
   border-collapse: collapse;
 }
 
-/* Стили для пагинации */
+
 .pagination-container {
-  text-align: center; /* Центрирование элементов пагинации */
-  margin-top: 4px; /* Отступ сверху для разделения с таблицей */
+  text-align: center; 
+  margin-top: 4px; 
 }
 
 .pagination-container button {
   padding: 8px 16px;
-  margin: 0 4px; /* Отступы между кнопками пагинации */
+  margin: 0 4px; 
   cursor: pointer;
 }
 
@@ -95,7 +93,7 @@ table {
   font-size: 16px;
 }
 
-/* Стили для ячеек таблицы */
+
 th, td {
   padding: 10px;
   text-align: center;

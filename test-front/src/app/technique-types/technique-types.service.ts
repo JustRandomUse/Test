@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Employee, EmployeeResponse } from './employees';
+import { TechniqueTypes, TechniqueTypesResponse } from './technique-types';
 import { MessageService } from '../message.service';
 
 @Injectable({ providedIn: 'root' })
-export class EmployeesService {
+export class TechniqueTypesService {
   getEmployees(currentPage: number, itemsPerPage: number) {
     throw new Error('Method not implemented.');
   }
 
-  private employeesUrl = 'http://localhost:8080/employees';  // URL для API
+  private employeesUrl = 'http://localhost:8080/technique_types';  // URL для API
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,7 +24,7 @@ export class EmployeesService {
   
 
   /** GET: получить всех сотрудников с сервера */
-  getEmployee(): Observable<EmployeeResponse> {
+  getEmployee(): Observable<TechniqueTypesResponse> {
     return this.ajaxRequest('GET', this.employeesUrl).pipe(
       tap(response => this.log('fetched employees')),
       map((data: any) => {
@@ -36,18 +36,18 @@ export class EmployeesService {
             total: data.length
           };
         }
-        return data as EmployeeResponse;
+        return data as TechniqueTypesResponse;
       }),
-      catchError(this.handleError<EmployeeResponse>('getEmployee'))
+      catchError(this.handleError<TechniqueTypesResponse>('getEmployee'))
     );
   }
 
   /** GET: получить сотрудника по ID. Вернёт 404, если не найден */
-  getEmployeeById(id: number): Observable<Employee> {
+  getEmployeeById(id: number): Observable<TechniqueTypes> {
     const url = `${this.employeesUrl}/${id}`;
-    return this.http.get<Employee>(url).pipe(
+    return this.http.get<TechniqueTypes>(url).pipe(
       tap(_ => this.log(`fetched employee id=${id}`)),
-      catchError(this.handleError<Employee>(`getEmployee id=${id}`))
+      catchError(this.handleError<TechniqueTypes>(`getEmployee id=${id}`))
     );
   }
 
@@ -68,25 +68,25 @@ export class EmployeesService {
   //////// Методы сохранения данных //////////
 
   /** POST: добавить нового сотрудника на сервер */
-  addEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.employeesUrl, employee, this.httpOptions).pipe(
-      tap((newEmployee: Employee) => this.log(`added employee w/ id=${newEmployee.id}`)),
-      catchError(this.handleError<Employee>('addEmployee'))
+  addEmployee(employee: TechniqueTypes): Observable<TechniqueTypes> {
+    return this.http.post<TechniqueTypes>(this.employeesUrl, employee, this.httpOptions).pipe(
+      tap((newEmployee: TechniqueTypes) => this.log(`added employee w/ id=${newEmployee.id}`)),
+      catchError(this.handleError<TechniqueTypes>('addEmployee'))
     );
   }
 
   /** DELETE: удалить сотрудника с сервера */
-  deleteEmployee(id: number): Observable<Employee> {
+  deleteEmployee(id: number): Observable<TechniqueTypes> {
     const url = `${this.employeesUrl}/${id}`;
 
-    return this.http.delete<Employee>(url, this.httpOptions).pipe(
+    return this.http.delete<TechniqueTypes>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted employee id=${id}`)),
-      catchError(this.handleError<Employee>('deleteEmployee'))
+      catchError(this.handleError<TechniqueTypes>('deleteEmployee'))
     );
   }
 
   /** PUT: обновить данные сотрудника на сервере */
-  updateEmployee(employee: Employee): Observable<any> {
+  updateEmployee(employee: TechniqueTypes): Observable<any> {
     return this.http.put(this.employeesUrl, employee, this.httpOptions).pipe(
       tap(_ => this.log(`updated employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
@@ -142,15 +142,13 @@ export class EmployeesService {
      // TODO: преобразовать ошибку для лучшего восприятия пользователем
       this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-  /** Log a message with the MessageService */
   private log(message: string) {
     this.messageService.add('EmployeesService: ${message}');
   }
 }
 
-export { EmployeeResponse };
+export { TechniqueTypesResponse };

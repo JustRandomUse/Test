@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Employee, EmployeeResponse } from './employees';
+import { Techniques, TechniquesResponse } from './techniques';
 import { MessageService } from '../message.service';
 
 @Injectable({ providedIn: 'root' })
-export class EmployeesService {
+export class TechniquesService {
   getEmployees(currentPage: number, itemsPerPage: number) {
     throw new Error('Method not implemented.');
   }
 
-  private employeesUrl = 'http://localhost:8080/employees';  // URL для API
+  private employeesUrl = 'http://localhost:8080/techniques';  // URL для API
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,7 +24,7 @@ export class EmployeesService {
   
 
   /** GET: получить всех сотрудников с сервера */
-  getEmployee(): Observable<EmployeeResponse> {
+  getEmployee(): Observable<TechniquesResponse> {
     return this.ajaxRequest('GET', this.employeesUrl).pipe(
       tap(response => this.log('fetched employees')),
       map((data: any) => {
@@ -36,18 +36,18 @@ export class EmployeesService {
             total: data.length
           };
         }
-        return data as EmployeeResponse;
+        return data as TechniquesResponse;
       }),
-      catchError(this.handleError<EmployeeResponse>('getEmployee'))
+      catchError(this.handleError<TechniquesResponse>('getEmployee'))
     );
   }
 
   /** GET: получить сотрудника по ID. Вернёт 404, если не найден */
-  getEmployeeById(id: number): Observable<Employee> {
+  getEmployeeById(id: number): Observable<Techniques> {
     const url = `${this.employeesUrl}/${id}`;
-    return this.http.get<Employee>(url).pipe(
+    return this.http.get<Techniques>(url).pipe(
       tap(_ => this.log(`fetched employee id=${id}`)),
-      catchError(this.handleError<Employee>(`getEmployee id=${id}`))
+      catchError(this.handleError<Techniques>(`getEmployee id=${id}`))
     );
   }
 
@@ -68,25 +68,25 @@ export class EmployeesService {
   //////// Методы сохранения данных //////////
 
   /** POST: добавить нового сотрудника на сервер */
-  addEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.employeesUrl, employee, this.httpOptions).pipe(
-      tap((newEmployee: Employee) => this.log(`added employee w/ id=${newEmployee.id}`)),
-      catchError(this.handleError<Employee>('addEmployee'))
+  addEmployee(employee: Techniques): Observable<Techniques> {
+    return this.http.post<Techniques>(this.employeesUrl, employee, this.httpOptions).pipe(
+      tap((newEmployee: Techniques) => this.log(`added employee w/ id=${newEmployee.id}`)),
+      catchError(this.handleError<Techniques>('addEmployee'))
     );
   }
 
   /** DELETE: удалить сотрудника с сервера */
-  deleteEmployee(id: number): Observable<Employee> {
+  deleteEmployee(id: number): Observable<Techniques> {
     const url = `${this.employeesUrl}/${id}`;
 
-    return this.http.delete<Employee>(url, this.httpOptions).pipe(
+    return this.http.delete<Techniques>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted employee id=${id}`)),
-      catchError(this.handleError<Employee>('deleteEmployee'))
+      catchError(this.handleError<Techniques>('deleteEmployee'))
     );
   }
 
   /** PUT: обновить данные сотрудника на сервере */
-  updateEmployee(employee: Employee): Observable<any> {
+  updateEmployee(employee: Techniques): Observable<any> {
     return this.http.put(this.employeesUrl, employee, this.httpOptions).pipe(
       tap(_ => this.log(`updated employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
@@ -147,10 +147,9 @@ export class EmployeesService {
     };
   }
 
-  /** Log a message with the MessageService */
   private log(message: string) {
     this.messageService.add('EmployeesService: ${message}');
   }
 }
 
-export { EmployeeResponse };
+export { TechniquesResponse };

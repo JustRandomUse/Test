@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeesService, EmployeeResponse } from './employees.service';
-import { Employee } from './employees';
-import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfrimDialogComponent } from '../confrim-dialog/confrim-dialog.component';
-import { EmployeeEditModalComponent } from './employee-edit-modal/employee-edit-modal.component';
+import { Employee } from './employees';
+import { EmployeesService, EmployeeResponse } from './employees.service';
+
+import { EmployeeModalComponent } 
+from './employee-modal/employee-modal.component';
+
+import { ConfrimDialogComponent } 
+from '../confrim-dialog/confrim-dialog.component';
+
+import { EmployeeEditModalComponent } 
+from './employee-edit-modal/employee-edit-modal.component';
 
 @Component({
   selector: 'app-employees',
@@ -14,7 +20,7 @@ import { EmployeeEditModalComponent } from './employee-edit-modal/employee-edit-
 
 export class EmployeesComponent implements OnInit {
   
-  employees: Employee[] = []; // Определяем массив сотрудников отдельно от EmployeeResponse
+  employees: Employee[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -52,7 +58,7 @@ searchTerm: any;
         this.employees = response.items;  // Заполняем массив сотрудников
         this.totalItems = response.total;  // Обновляем общее количество элементов для пагинации
       },
-      (error: any) => console.log(error));  // Логируем ошибки, если есть
+      (error: any) => console.log(error));  
   }
 
   add(name: string, office: number): void {
@@ -94,7 +100,7 @@ searchTerm: any;
         .subscribe(() => {
           this.loadEmployees();  // Обновляем список сотрудников после редактирования
         },
-        (error: any) => console.log(error));  // Логируем ошибки, если есть
+        (error: any) => console.log(error));  
     }
   });
 }

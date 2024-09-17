@@ -1,32 +1,37 @@
 <div class="container">
-  <div class="button-container">
-    <button (click)="openAddEmployeeEquipmentModal()">Добавить Сотрудника</button>
+  <div class="search-container">
+    <input type="text" placeholder="Поиск..." [(ngModel)]="searchTerm" (ngModelChange)="searchEmployees($event)">
   </div>
 
-  <div class="search-container">
-    <input type="text" placeholder="Поиск..." (keyup.enter)="onSearch($event)">
+  <div class="button-container">
+    <button (click)="openAddEmployeeModal()">Добавить Тип Техники</button>
   </div>
-</div>
 
   <table>
     <thead>
       <tr>
         <th>№</th>
-        <th>ФИО</th>
-        <th>Кабинет</th>
+        <th>Сотрудник</th>
+        <!-- <th>Каб</th> -->
         <th>Техника</th>
         <th>🗑️</th>
         <th>✏️</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee_equipment of employee_equipment">
-        <td>{{ employee_equipment.id}}</td>
-        <td>{{ employee_equipment.name }}</td>
-        <td>{{ employee_equipment.office }}</td>
-        <td>{{ employee_equipment.Techniques }}</td>
-        <td><button (click)="deleteEmployeeEquipment(employee_equipment)">🗑️</button></td>
-        <td><button (click)="editEmployeeEquipment(employee_equipment)">✏️</button></td>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.employees_id }}</td>
+        <td>{{ employee.technique_id }}</td>
+        <td><button (click)="delete(employee)">🗑️</button></td>
+        <td><button (click)="edit(employee)">✏️</button></td>
       </tr>
     </tbody>
   </table>
+
+  <div class="pagination-container">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Страница {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= totalItems">Next</button>
+  </div>
+</div>

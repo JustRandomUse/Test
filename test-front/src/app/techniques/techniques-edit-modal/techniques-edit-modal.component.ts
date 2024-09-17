@@ -2,16 +2,15 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-employee-edit-modal',
-  templateUrl: './employee-edit-modal.component.html',
-  styleUrls: ['./employee-edit-modal.component.css']
+  selector: 'app-techniques-edit-modal',
+  templateUrl: './techniques-edit-modal.component.html',
+  styleUrl: './techniques-edit-modal.component.css'
 })
-export class EmployeeEditModalComponent {
-
-  employee: { name: string; office: number } = { name: '', office: 0 };
+export class TechniquesEditModalComponent {
+  employee: { name: string; type_id: number } = { name: '', type_id: 0 };
 
   constructor(
-    public dialogRef: MatDialogRef<EmployeeEditModalComponent>,
+    public dialogRef: MatDialogRef<TechniquesEditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data) {
@@ -30,3 +29,5 @@ export class EmployeeEditModalComponent {
     this.dialogRef.close(this.employee); // Закрываем модальное окно и передаем данные
   }
 }
+
+

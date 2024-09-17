@@ -1,17 +1,17 @@
 import { Component, Inject } from '@angular/core';
+import { EmployeeEquipment } from '../employee-equipment';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-employee-edit-modal',
-  templateUrl: './employee-edit-modal.component.html',
-  styleUrls: ['./employee-edit-modal.component.css']
+  selector: 'app-employee-equipment-edit-modal',
+  templateUrl: './employee-equipment-edit-modal.component.html',
+  styleUrl: './employee-equipment-edit-modal.component.css'
 })
-export class EmployeeEditModalComponent {
-
-  employee: { name: string; office: number } = { name: '', office: 0 };
+export class EmployeeEquipmentEditModalComponent {
+  employee: EmployeeEquipment = { id: 0, employees_id: 0, technique_id: 0 };
 
   constructor(
-    public dialogRef: MatDialogRef<EmployeeEditModalComponent>,
+    public dialogRef: MatDialogRef<EmployeeEquipmentEditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data) {
