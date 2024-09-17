@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeesService, EmployeeResponse } from './employees.service';
 import { Employee } from './employees';
+import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfrimDialogComponent } from '../confrim-dialog/confrim-dialog.component';
+import { EmployeeEditModalComponent } from './employee-edit-modal/employee-edit-modal.component';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
+
 export class EmployeesComponent implements OnInit {
   
   employees: Employee[] = []; // Определяем массив сотрудников отдельно от EmployeeResponse
@@ -15,12 +20,23 @@ export class EmployeesComponent implements OnInit {
   itemsPerPage: number = 5;
   totalItems: number = 0;
 searchTerm: any;
+  // dialog: any;
 
 
-  constructor(private employeesService: EmployeesService) {}
+  constructor(private employeesService: EmployeesService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadEmployees();
+  }
+
+  openAddEmployeeModal(): void {
+    const dialogRef = this.dialog.open(EmployeeModalComponent);
+
+    dialogRef.afterClosed().subscribe((result: { name: string; office: number; }) => {
+      if (result) {
+        this.add(result.name, result.office);
+      }
+    });
   }
 
   getEmployees(): void {
@@ -54,18 +70,34 @@ searchTerm: any;
   }
 
   delete(employee: Employee): void {
-    this.employees = this.employees.filter(h => h !== employee); // Удаляем сотрудника из локального массива
-    this.employeesService.deleteEmployee(employee.id).subscribe();
+    const dialogRef = this.dialog.open(ConfrimDialogComponent, {
+      data: { message: `Вы уверены, что хотите удалить сотрудника ${employee.name}?` }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.employees = this.employees.filter(h => h !== employee); // Удаляем сотрудника из локального массива
+        this.employeesService.deleteEmployee(employee.id).subscribe();
+      }
+    });
   }
 
 
-  edit(employee: Employee): void {
-    this.employeesService.updateEmployee(employee)
-      .subscribe(() => {
-        this.loadEmployees();  // Обновляем список сотрудников после редактирования
-      },
-      (error: any) => console.log(error));  // Логируем ошибки, если есть
-  }
+ edit(employee: Employee): void {
+  const dialogRef = this.dialog.open(EmployeeEditModalComponent, {
+    data: { employee: { ...employee } }  // Передаем копию сотрудника для редактирования
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.employeesService.updateEmployee(result)
+        .subscribe(() => {
+          this.loadEmployees();  // Обновляем список сотрудников после редактирования
+        },
+        (error: any) => console.log(error));  // Логируем ошибки, если есть
+    }
+  });
+}
 
   previousPage(): void {
     if (this.currentPage > 1) {

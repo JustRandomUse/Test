@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Добавить Сотрудника</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>ФИО</mat-label>
+      <input matInput [(ngModel)]="employee.name" name="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Кабинет</mat-label>
+      <input matInput type="number" [(ngModel)]="employee.office" name="office" required>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Отмена</button>
+      <button mat-button type="submit">Добавить</button>
+    </div>
+  </form>
+</div>

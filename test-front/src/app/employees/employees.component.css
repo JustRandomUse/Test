@@ -1,75 +1,106 @@
+/* Стили для контейнера навигации */
 .nav-container {
-  margin-bottom: 20px; 
+  text-align: center; /* Центрирование навигации по горизонтали */
+  margin-bottom: 4px; /* Отступ снизу для разделения с остальным контентом */
 }
 
+/* Стили для навигационного меню */
+nav {
+  display: inline-block; /* Центрирование навигации по горизонтали */
+}
+
+/* Стили для ссылок навигации */
+nav a {
+  padding: 1rem;
+  text-decoration: none;
+  margin: 0 4px; /* Отступы между вкладками */
+  background-color: #e8e8e8;
+  color: #3d3d3d;
+  border-radius: 4px;
+  display: inline-block; /* Вкладки отображаются как блочные элементы в одной строке */
+}
+
+nav a:hover {
+  color: #007bff;
+}
+
+nav a.active {
+  background-color: rgb(213, 215, 224);
+}
+
+/* Стили для контейнера */
 .container {
-  text-align: center;
-  margin-top: 20px;
+  text-align: center; /* Центрирование содержимого */
+  margin-top: 4px; /* Отступ сверху для разделения с навигацией */
 }
 
+/* Стили для кнопок */
 .button-container {
-  margin-bottom: 20px; 
+  margin-bottom: 4px; /* Отступ снизу для разделения с другими элементами */
 }
 
 .button-container button {
-  background-color: #007bff; 
-  color: white; 
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 10px 20px; 
-  border-radius: 5px; 
+  padding: 10px 20px;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;  
+  transition: background-color 0.3s ease;
 }
 
 .button-container button:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
+/* Стили для поисковой строки */
 .search-container {
-  margin-bottom: 20px;
+  margin-bottom: 4px; /* Отступ снизу для разделения с кнопкой добавления */
 }
 
 .search-container input {
-  width: 66.67%;
+  width: 66.67%; /* Длина поисковой строки равна длине таблицы */
   display: block;
   padding: 8px;
-  margin: 0 auto;
+  margin: 0 auto; /* Центрирование поисковой строки */
   box-sizing: border-box;
-} 
+}
 
+/* Стили для таблицы */
 table {
-  width: 66.67%; 
-  margin: 0 auto; 
+  width: 66.67%; /* Ширина таблицы равна ширине поисковой строки */
+  margin: 0 auto; /* Центрирование таблицы */
   border-collapse: collapse;
 }
 
+/* Стили для пагинации */
 .pagination-container {
-  text-align: center;
-  margin-top: 20px; 
+  text-align: center; /* Центрирование элементов пагинации */
+  margin-top: 4px; /* Отступ сверху для разделения с таблицей */
 }
 
 .pagination-container button {
   padding: 8px 16px;
-  margin: 0 10px; 
+  margin: 0 4px; /* Отступы между кнопками пагинации */
   cursor: pointer;
 }
 
 .pagination-container button:disabled {
   cursor: not-allowed;
-  opacity: 0.6; 
+  opacity: 0.6;
 }
 
 .pagination-container span {
   font-size: 16px;
 }
 
+/* Стили для ячеек таблицы */
 th, td {
   padding: 10px;
-  text-align: center; 
+  text-align: center;
 }
 
 .icon-cell {
-  text-align: center; 
+  text-align: center;
 }
-
